@@ -1,0 +1,24 @@
+{"nome":"tsi2011",
+ "disciplina":"Web Services",
+ "professor":"Rafael",
+ "ano":2012,
+ "alunos":[{"nome":"Lauro",
+			"nota":8.5,
+			"codigo":1
+		   },
+           {"nome":"Aline",
+		    "nota":9.0,
+			"codigo":5
+		   },
+		   {
+		    "nome": "Gustavo",
+			"nota": 7,
+			"codigo": 9 
+		   },
+		   {
+            "nome" : "Paulo Vitor",
+			"nota" : 9.4,
+			"codigo" : 3
+		   }
+		  ]
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Busca Dados</title>
+		
+		<script type="text/javascript">
+			/*Cria o objeto de requisição XMLHttp*/
+			function criaXMLHttp(){
+				var xmlhttp;
+				
+				if (window.XMLHttpRequest())
+					xmlhttp = new XMLHttpRequest();
+				else if(window.ActiveXObject)
+					xmlhttp = new ActiveXObject("Microsoft,XMLHTTP");
+				else
+					alert("Seu navegador está desatualizado.");
+				return xmlhttp;				
+			}
+			
+			/*Busca os dados e coloca-os dentro da tag div */
+			function busca(){
+				var div = document.getElementById("info_turma");
+				var XMLHttp = criaXMLHttp();
+				XMLHttp.open("get","http://localhost/turma.json",true);
+				XMLHttp.onreadystatechange = function (){
+					if (XMLHttp.readyState === 4)
+						if (XMLHttp.status === 200)
+						{
+							var obj = JSON.parse(XMLHttp.responseText);
+					          var saida = "Curso: " + obj["nome"] + "<br>" +  
+					        	  "Disciplina: " + obj["disciplina"] + "<br>" + 
+							      "Professor: "  + obj["professor"] + "<br>"  + 
+			                                      "Ano: " + obj["ano"] + "<br>";
+						  
+
+						  for (var i = 0; i < obj["alunos"].length; i++)
+							saida += obj["alunos"][i]["codigo"] + " || " + obj["alunos"][i]["nome"] + " || " + obj["alunos"][i]["nota"] + "<br>";
+				
+				    		  div.innerHTML = saida;  	
+						}
+						else
+							div.innerHTML = "<p>Carregando...</p>";
+				};
+				
+				XMLHttp.send(null);
+			
+			}
+		</script>
+	</head>
+	<body>
+		<div id="info_turma">
+			<input type="button" value="Buscar Dados" onclick=busca() />
+		</div>
+	</body>
+</html>
